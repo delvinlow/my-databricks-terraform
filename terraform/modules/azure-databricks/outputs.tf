@@ -6,6 +6,10 @@ output "workspace_id" {
   value = azurerm_databricks_workspace.databricks_workspace.workspace_id
 }
 
-output "azure_resource_id" {
+output "resource_id" {
   value = azurerm_databricks_workspace.databricks_workspace.id
+}
+
+output "workspace_name" {
+  value = var.databricks_workspace_name
 }

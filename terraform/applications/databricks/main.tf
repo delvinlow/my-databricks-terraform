@@ -34,3 +34,18 @@ module "databricks_audit_logs_analytics_workspace" {
   resource_group                = azurerm_resource_group.example_rg.name
   resource_group_location       = azurerm_resource_group.example_rg.location
 }
+
+data "azurerm_monitor_diagnostic_categories" "adb_diagnostic_categories" {
+  resource_id = module.databricks_workspace.resource_id
+}
+
+module "databricks_audit_logs_diagnostic_setting" {
+  source = "../../modules/diagnostic-setting"
+
+  diagnostic_setting_name    = "${module.databricks_workspace.workspace_name}-diagnostic-setting"
+  target_resource_id         = module.databricks_workspace.resource_id
+  log_analytics_workspace_id = module.databricks_audit_logs_analytics_workspace.id
+
+  logs_to_include         = data.azurerm_monitor_diagnostic_categories.adb_diagnostic_categories.logs
+  logs_to_exclude         = []
+}
