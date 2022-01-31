@@ -11,7 +11,7 @@ variable "logs_analytics_workspace_name" {
 }
 
 variable "logs_analytics_workspace_sku" {
-  type = number
+  type = string
 }
 
 variable "log_retention_days" {
