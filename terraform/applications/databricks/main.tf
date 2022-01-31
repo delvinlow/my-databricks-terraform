@@ -19,6 +19,7 @@ resource "azurerm_resource_group" "example_rg" {
 module "databricks_workspace" {
   source = "../../modules/azure-databricks"
 
+  databricks_workspace_name           = "test-adb-workspace"
   databricks_workspace_resource_group = azurerm_resource_group.example_rg.name
   databricks_workspace_location       = azurerm_resource_group.example_rg.location
   databricks_workspace_sku            = "premium"
